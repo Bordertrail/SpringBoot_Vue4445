@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sys?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+mybatis:
+  typeAliasesPackage: com.woniu.springboot_vue.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+  mapper-locations: classpath:mapper/*.xml

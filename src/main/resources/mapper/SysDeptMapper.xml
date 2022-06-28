@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.springboot_vue.mapper.SysDeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.woniu.springboot_vue.entity.SysDept">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="dcode" column="dcode" jdbcType="CHAR"/>
+            <result property="dname" column="dname" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,dcode,dname
+    </sql>
+
+    <select id="queryAll"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_dept
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_dept
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_dept
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.woniu.springboot_vue.entity.SysDept" useGeneratedKeys="true">
+        insert into sys_dept
+        ( id,dcode,dname
+        )
+        values (#{id,jdbcType=INTEGER},#{dcode,jdbcType=CHAR},#{dname,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.woniu.springboot_vue.entity.SysDept" useGeneratedKeys="true">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="dcode != null">dcode,</if>
+                <if test="dname != null">dname,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="dcode != null">#{dcode,jdbcType=CHAR},</if>
+                <if test="dname != null">#{dname,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.woniu.springboot_vue.entity.SysDept">
+        update sys_dept
+        <set>
+                <if test="dcode != null">
+                    dcode = #{dcode,jdbcType=CHAR},
+                </if>
+                <if test="dname != null">
+                    dname = #{dname,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.woniu.springboot_vue.entity.SysDept">
+        update sys_dept
+        set 
+            dcode =  #{dcode,jdbcType=CHAR},
+            dname =  #{dname,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+</mapper>
